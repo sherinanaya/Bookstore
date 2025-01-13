@@ -4,6 +4,7 @@ import java.util.List;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +55,13 @@ public class BookController {
 		Book book = bookService.getBookById(id);
 		model.addAttribute("book", book);
 		return "edit_book_page";
+	}
+	
+	//List books matching keyword
+	@GetMapping("/search_books")
+	public String viewSearchBooksPage(Model model, @Param("keyword") Long keyword) {
+		Book book = bookService.getBookById(keyword);
+		model.addAttribute("book", book);
+		return "search_books_page";
 	}
 }
