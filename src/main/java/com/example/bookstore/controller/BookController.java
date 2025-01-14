@@ -1,6 +1,7 @@
 package com.example.bookstore.controller;
 
 import java.util.List;
+import java.util.Optional;
 import com.example.bookstore.entity.Book;
 import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class BookController {
 	@GetMapping("/")
 	public String displayHomePage(Model model) {
 		List<Book> books = bookService.getAllBooks();
-		
 		model.addAttribute("book", books);
 		return "home_page";
 	}
@@ -61,6 +61,7 @@ public class BookController {
 	@GetMapping("/search_books")
 	public String viewSearchBooksPage(Model model, @Param("keyword") Long keyword) {
 		Book book = bookService.getBookById(keyword);
+		System.out.println(book);
 		model.addAttribute("book", book);
 		return "search_books_page";
 	}
