@@ -41,4 +41,11 @@ public class BookService {
 		bookRepository.save(getBookById(Id));
 	}
 	
+	public List<Book> searchAllBooks(String keyword) {
+		if (!keyword.isEmpty())
+			return (List<Book>) bookRepository.findByKeyword(keyword);
+		else
+			return (List<Book>) bookRepository.findAll();
+	}
+	
 }
