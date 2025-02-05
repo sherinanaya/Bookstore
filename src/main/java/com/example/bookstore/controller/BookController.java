@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -59,10 +60,9 @@ public class BookController {
 	
 	//List books matching keyword
 	@GetMapping("/search_books")
-	public String viewSearchBooksPage(Model model, @Param("keyword") Long keyword) {
-		Book book = bookService.getBookById(keyword);
-		System.out.println(book);
-		model.addAttribute("book", book);
+	public String viewSearchBooksPage(Model model, @Param("keyword") String keyword) {
+		List<Book> books = bookService.searchAllBooks(keyword);
+		model.addAttribute("book", books);
 		return "search_books_page";
 	}
 }
