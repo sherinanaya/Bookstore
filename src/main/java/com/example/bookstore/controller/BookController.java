@@ -65,4 +65,10 @@ public class BookController {
 		model.addAttribute("book", books);
 		return "search_books_page";
 	}
+	
+	@GetMapping("/cart")
+	public String displayCartPage() {
+		
+		return "cart_page";
+	}
 }
