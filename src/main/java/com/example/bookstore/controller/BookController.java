@@ -1,4 +1,6 @@
 package com.example.bookstore.controller;
+import com.example.bookstore.entity.CartItem;
+import com.example.bookstore.service.CartService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,24 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+
+    @Autowired
+    private CartService cartService;
+
+    @GetMapping("/cart")
+    public String viewCart(Model model) {
+        List<CartItem> cartItems = cartService.getCartItems();
+        double totalBill = cartService.getTotalBill();
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("totalBill", totalBill);
+        return "cart_page";
+    }
+
+    @GetMapping("/add_to_cart/{id}")
+    public String addToCart(@PathVariable("id") Long id) {
+        cartService.addToCart(id);
+        return "redirect:/";
+    }
 	
 	//Display Home Page
 	@GetMapping("/")
@@ -66,9 +86,6 @@ public class BookController {
 		return "search_books_page";
 	}
 	
-	@GetMapping("/cart")
-	public String displayCartPage() {
-		
-		return "cart_page";
-	}
+
+	
 }
