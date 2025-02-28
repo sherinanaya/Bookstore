@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.example.bookstore.entity.Book;
-import com.example.bookstore.entity.CartItem;
-import com.example.bookstore.entity.Cart;
+//import com.example.bookstore.entity.CartItem;
+//import com.example.bookstore.entity.Cart;
 
 
 
