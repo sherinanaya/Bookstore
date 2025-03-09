@@ -30,6 +30,7 @@ public class BookController {
     public String viewCart(Model model) {
         List<CartItem> cartItems = cartService.getCartItems();
         double totalBill = cartService.getTotalBill();
+
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalBill", totalBill);
         return "cart_page";
@@ -38,21 +39,30 @@ public class BookController {
     @GetMapping("/add_to_cart/{id}")
     public String addToCart(@PathVariable("id") Long id) {
         cartService.addToCart(id);
-        return "redirect:/";
+        return "redirect:/";  // After adding, redirect to home page
     }
 	
 	//Display Home Page
-	@GetMapping("/")
-	public String displayHomePage(Model model) {
-		List<Book> books = bookService.getAllBooks();
-		model.addAttribute("book", books);
-		return "home_page";
-	}
+    @GetMapping("/")
+    public String displayHomePage(Model model) {
+        List<Book> books = bookService.getAllBooks();
+        int cartItemCount = cartService.getCartItemCount();
+
+        model.addAttribute("book", books);
+        model.addAttribute("cartCount", cartItemCount);  // Pass cart count to display on home page
+        return "home_page";
+    }
 	
 	@GetMapping("/add_book")
 	public String displayAddBookPage() {
 		
 		return "add_book_page";
+	}
+	
+	@GetMapping("/display")
+	public String displayBookPage() {
+		
+		return "display_book_page";
 	}
 	
 	//Save a new book
